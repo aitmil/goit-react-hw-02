@@ -3,6 +3,7 @@ import css from "./App.module.css";
 import Feedback from "../Feedback/Feedback";
 import Options from "../Options/Options";
 import Description from "../Description/Description";
+import Notification from "../Notification/Notification";
 
 export default function App() {
   const [state, setState] = useState({
@@ -15,11 +16,18 @@ export default function App() {
     return setState({ ...state, [feedbackType]: state[feedbackType] + 1 });
   };
 
+  let totalFeedback = 0;
+  Object.values(state).forEach((state) => (totalFeedback += state));
+
   return (
     <div className={css.container}>
       <Description />
       <Options updateFeedback={updateFeedback} />
-      <Feedback good={state.good} neutral={state.neutral} bad={state.bad} />
+      {totalFeedback > 0 ? (
+        <Feedback good={state.good} neutral={state.neutral} bad={state.bad} />
+      ) : (
+        <Notification />
+      )}
     </div>
   );
 }
