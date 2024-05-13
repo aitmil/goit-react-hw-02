@@ -5,22 +5,21 @@ import Options from "../Options/Options";
 import Description from "../Description/Description";
 
 export default function App() {
-  const initialState = {
+  const [state, setState] = useState({
     good: 0,
     neutral: 0,
     bad: 0,
-  };
-  const [clicks, setClicks] = useState();
+  });
 
-  const handleClick = () => {
-    setClicks(clicks + 1);
+  const updateFeedback = (feedbackType) => {
+    return setState({ ...state, [feedbackType]: state[feedbackType] + 1 });
   };
 
   return (
     <div className={css.container}>
       <Description />
-      <Options onClick={handleClick} click={clicks} />
-      <Feedback />
+      <Options updateFeedback={updateFeedback} />
+      <Feedback good={state.good} neutral={state.neutral} bad={state.bad} />
     </div>
   );
 }
