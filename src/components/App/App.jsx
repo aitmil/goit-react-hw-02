@@ -36,7 +36,12 @@ export default function App() {
         resetFeedback={resetFeedback}
       />
       {totalFeedback > 0 ? (
-        <Feedback good={state.good} neutral={state.neutral} bad={state.bad} />
+        <Feedback
+          good={state.good}
+          neutral={state.neutral}
+          bad={state.bad}
+          totalFeedback={totalFeedback}
+        />
       ) : (
         <Notification />
       )}
