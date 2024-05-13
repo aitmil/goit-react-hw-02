@@ -16,13 +16,25 @@ export default function App() {
     return setState({ ...state, [feedbackType]: state[feedbackType] + 1 });
   };
 
+  const resetFeedback = () => {
+    return setState({
+      good: 0,
+      neutral: 0,
+      bad: 0,
+    });
+  };
+
   let totalFeedback = 0;
   Object.values(state).forEach((state) => (totalFeedback += state));
 
   return (
     <div className={css.container}>
       <Description />
-      <Options updateFeedback={updateFeedback} />
+      <Options
+        updateFeedback={updateFeedback}
+        totalFeedback={totalFeedback}
+        resetFeedback={resetFeedback}
+      />
       {totalFeedback > 0 ? (
         <Feedback good={state.good} neutral={state.neutral} bad={state.bad} />
       ) : (
