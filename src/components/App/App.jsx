@@ -33,6 +33,8 @@ export default function App() {
   let totalFeedback = 0;
   Object.values(state).forEach((state) => (totalFeedback += state));
 
+  const positiveFeedback = Math.round((state.good / totalFeedback) * 100);
+
   return (
     <div className={css.container}>
       <Description />
@@ -47,6 +49,7 @@ export default function App() {
           neutral={state.neutral}
           bad={state.bad}
           totalFeedback={totalFeedback}
+          positive={positiveFeedback}
         />
       ) : (
         <Notification />
